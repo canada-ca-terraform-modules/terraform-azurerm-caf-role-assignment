@@ -5,7 +5,7 @@ variable "rbac" {
 }
 
 module "rbacv2" {
-  source = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-role-assignment?ref=v1.0.0"
+  source = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-role-assignment?ref=v1.0.1"
   for_each = {for role in try(var.rbac, []) : role.role => role}
 
   scope = each.value.scope

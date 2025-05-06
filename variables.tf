@@ -1,6 +1,6 @@
 variable "scope" {
   description = "ID for the resource where the role will be assigned"
-  type = string
+  type = any
 }
 
 variable "principal_id" {
