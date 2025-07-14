@@ -1,6 +1,12 @@
 variable "scope" {
-  description = "ID for the resource where the role will be assigned"
-  type = any
+  description = "ID sfor the resource where the role will be assigned"
+  type = list(string)
+}
+
+variable "custom_scope_names" {
+  description = "List of names to use instead of the scopes for naming TF resources. This is required if the scope is being created in the same TF invocation."
+  type = list(string)
+  default = []
 }
 
 variable "principal_id" {

@@ -1,5 +1,5 @@
 resource "azurerm_role_assignment" "roles" {
-  for_each = {for assignment in local.assignments: "${assignment.principal_id}-${basename(assignment.scope)}" => assignment}
+  for_each = {for assignment in local.assignments: "${assignment.principal_id}-${assignment.scope_name}" => assignment}
   scope = each.value.scope
   principal_id = each.value.principal_id
 
