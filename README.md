@@ -30,7 +30,7 @@ module "rbac" {
   source = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-role-assignment?ref=v1.0.0"
   for_each = {for role in try(var.<variable for your module>.rbac, []) : role.role => role}
 
-  scope = azurerm_storage_account.storage-account.id
+  scope = each.value.scope
   principal_id = each.value.principal_id
   role_definition = each.key
   role_assignment = each.value
@@ -41,13 +41,16 @@ The block in the tfvars file will be the same as the one in the template
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
-No requirements.
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | n/a |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.0 |
 
 ## Modules
 
