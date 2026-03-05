@@ -30,7 +30,7 @@ module "rbac" {
   source = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-role-assignment?ref=v1.0.0"
   for_each = {for role in try(var.<variable for your module>.rbac, []) : role.role => role}
 
-  scope = azurerm_storage_account.storage-account.id
+  scope = each.value.scope
   principal_id = each.value.principal_id
   role_definition = each.key
   role_assignment = each.value
