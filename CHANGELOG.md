@@ -16,5 +16,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Tighten `principal_id` to `list(string)` and fix default scope wiring so Azure receives full scope IDs.
 - Update README, ESLZ example files, and release version pinning to the new module ref.
 
+### Breaking Changes
+- `principal_id` is now strictly `list(string)` (was `any`). Callers passing a bare string instead of a list must wrap it (e.g. `principal_id = ["00000000-..."]` instead of `principal_id = "00000000-..."`).
+
 ### Fixed
 - Correct the `scope` description typo in module inputs.
