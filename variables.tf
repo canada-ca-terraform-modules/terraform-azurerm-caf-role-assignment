@@ -1,5 +1,5 @@
 variable "scope" {
-  description = "ID sfor the resource where the role will be assigned"
+  description = "ID for the resource where the role will be assigned"
   type        = list(string)
 }
 
@@ -10,8 +10,8 @@ variable "custom_scope_names" {
 }
 
 variable "principal_id" {
-  description = "ID for the principal (User, Group, Service Principal) to assign the Role definition to"
-  type        = any
+  description = "List of principal IDs (User, Group, or Service Principal) to assign the role definition to"
+  type        = list(string)
 }
 
 variable "role_definition" {
