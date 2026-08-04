@@ -15,6 +15,15 @@ run "naming_convention" {
   }
 }
 
+run "scope_is_full_resource_id" {
+  command = plan
+
+  assert {
+    condition     = azurerm_role_assignment.roles["11111111-1111-1111-1111-111111111111-rg-one"].scope == "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-one"
+    error_message = "scope attribute must be the full resource ID, not the basename."
+  }
+}
+
 run "default_values" {
   command = plan
 
