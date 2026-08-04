@@ -8,7 +8,7 @@ locals {
     for name in var.custom_scope_names :
     name => var.scope[index(var.custom_scope_names, name)]
     } : {
-    for scope in var.scope : scope => basename(scope)
+    for scope in var.scope : basename(scope) => scope
   }
 
 

@@ -1,6 +1,8 @@
 ## Requirements
 
-No requirements.
+| Name | Version |
+|------|---------|
+| azurerm | ~> 5.0 |
 
 ## Providers
 
@@ -12,10 +14,10 @@ No requirements.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| principal\_id | ID for the principal (User, Group, Service Principal) to assign the Role definition to | `any` | n/a | yes |
-| role\_assignment | Object containing all the parameters for the role\_assignment | `any` | `{}` | no |
+| principal\_id | List of principal IDs (User, Group, or Service Principal) to assign the role definition to | `list(string)` | n/a | yes |
+| role\_assignment | Object containing all the parameters for the role assignment | `any` | `{}` | no |
 | role\_definition | Name or ID of the RBAC role being assigned | `string` | n/a | yes |
-| scope | ID for the resource where the role will be assigned | `string` | n/a | yes |
+| scope | ID for the resource where the role will be assigned | `list(string)` | n/a | yes |
 
 ## Outputs
 
@@ -27,11 +29,11 @@ This module can be used within another to allow role assignment of any arbitrary
 
 ```
 module "rbac" {
-  source = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-role-assignment?ref=v1.0.0"
-  for_each = {for role in try(var.<variable for your module>.rbac, []) : role.role => role}
+  source   = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-role-assignment?ref=v1.0.3"
+  for_each = { for role in try(var.<variable for your module>.rbac, []) : role.role => role }
 
-  scope = each.value.scope
-  principal_id = each.value.principal_id
+  scope           = each.value.scope
+  principal_id    = each.value.principal_id
   role_definition = each.key
   role_assignment = each.value
 }
@@ -44,13 +46,13 @@ The block in the tfvars file will be the same as the one in the template
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~> 5.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 3.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 5.0.1 |
 
 ## Modules
 
@@ -67,10 +69,10 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_custom_scope_names"></a> [custom\_scope\_names](#input\_custom\_scope\_names) | List of names to use instead of the scopes for naming TF resources. This is required if the scope is being created in the same TF invocation. | `list(string)` | `[]` | no |
-| <a name="input_principal_id"></a> [principal\_id](#input\_principal\_id) | ID for the principal (User, Group, Service Principal) to assign the Role definition to | `any` | n/a | yes |
+| <a name="input_principal_id"></a> [principal\_id](#input\_principal\_id) | List of principal IDs (User, Group, or Service Principal) to assign the role definition to | `list(string)` | n/a | yes |
 | <a name="input_role_assignment"></a> [role\_assignment](#input\_role\_assignment) | Object containing all the parameters for the role\_assignment | `any` | `{}` | no |
 | <a name="input_role_definition"></a> [role\_definition](#input\_role\_definition) | Name or ID of the RBAC role being assigned | `string` | n/a | yes |
-| <a name="input_scope"></a> [scope](#input\_scope) | ID sfor the resource where the role will be assigned | `list(string)` | n/a | yes |
+| <a name="input_scope"></a> [scope](#input\_scope) | ID for the resource where the role will be assigned | `list(string)` | n/a | yes |
 
 ## Outputs
 
