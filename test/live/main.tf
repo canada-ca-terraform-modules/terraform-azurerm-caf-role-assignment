@@ -1,3 +1,4 @@
+# Wired to .github/workflows/live-test.yml as of this comment.
 terraform {
   required_version = ">= 1.9"
   required_providers {
